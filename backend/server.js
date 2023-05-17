@@ -1,7 +1,10 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const app = require("./app");
+const connectDatabase= require("./config/database")
 
+//connect to  database
+connectDatabase()
 dotenv.config({ path: "backend/config/config.env" });
 
 
