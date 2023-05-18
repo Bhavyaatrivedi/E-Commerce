@@ -31,7 +31,16 @@ mongoose
     console.log(err);
   });
 
-app.listen(process.env.PORT, () => {
+const server = app.listen(process.env.PORT, () => {
   console.log(`Server is working on http://localhost:${process.env.PORT}`);
 });
 
+// unhandles promise rejection
+process.on("unhandledRejection", (err)=>{
+  console.log(`error: ${err.message}`);
+  console.log(`Shutting down the server dur to unhandled Promise rejection`);
+
+  server.close(()=>{
+    process.exit(1);
+  })
+})
